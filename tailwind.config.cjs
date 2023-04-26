@@ -91,9 +91,14 @@ module.exports = {
                 "12px",
                 { lineHeight: "12px", fontWeight: "400" },
             ],
+            "tab/h2": ["24px", { lineHeight: "33.6px", fontWeight: "600" }],
             small: ["8px", { lineHeight: "100%", fontWeight: "500" }],
         },
         colors: {
+            custom: {
+                gray: "#F8F9FB",
+                border: "#E8E9ED"
+            },
             gray: {
                 900: "#1D2136",
                 800: "#2F3246",
