@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import Loader from "../Loader/Loader";
+// import Loader from "../Loader/Loader";
 //primary/secondary/text button with icon
 
 export interface ButtonProps {
@@ -58,11 +58,11 @@ const Button = (props: ButtonProps, ref: any) => {
             ${loading ? "relative" : ""}`}
             {...rest}
         >
-            {loading ? (
+            {/* {loading ? (
                 <Loader
                     className={`${size === "sm" ? "w-3 h-3" : "w-4 h-4"}`}
                 />
-            ) : null}
+            ) : null} */}
             {/* <>
                 <span
                     className={`${
