@@ -1,11 +1,14 @@
 import InputField from "@components/InputField/InputField";
 import Icon from "@components/IcomoonIcon/Icon";
 import USFlag from "@assets/images/united-states.png";
+import { forwardRef } from "react";
 
-export default function Header() {
-  console.log(USFlag);
+const Header = forwardRef((_props, ref) => {
   return (
-    <header className="flex flex-row items-center justify-between  w-full h-16 px-6 py-3   border border-solid">
+    <header
+      ref={ref as React.LegacyRef<HTMLElement>}
+      className="flex flex-row items-center justify-between  w-full h-16 px-6 py-3   border border-solid"
+    >
       <InputField
         contstyle="max-w-xs   border border-solid rounded"
         inputClassName="h-10 focus:border-gray-500"
@@ -28,4 +31,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+});
+
+export default Header;
