@@ -6,7 +6,7 @@ import { Tooltip } from "react-tooltip";
 import { classNames } from "../../utils/functions/utils";
 
 export interface InputFieldPropsType
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix"> {
   label?: string;
   error?: FieldError | undefined;
   contstyle?: string;
@@ -14,6 +14,7 @@ export interface InputFieldPropsType
   labelClassName?: string;
   inputClassName?: string;
   errorClassName?: string;
+  prefix?: React.ReactNode;
   sufix?: React.ReactNode;
   shouldSufixButtonWork?: boolean;
   shouldPrefixButtonWork?: boolean;
@@ -84,16 +85,19 @@ const InputField = (props: InputFieldPropsType, ref: any) => {
           label ? "mt-1" : ""
         } rounded-md shadow-sm ${divInputWrapper}`}
       >
-        <div
-          className={classNames(
-            "absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 ",
-            shouldPrefixButtonWork
-              ? "pointer-events-auto"
-              : "pointer-events-none"
-          )}
-        >
-          {prefix}
-        </div>
+        {prefix && (
+          <div
+            className={classNames(
+              "absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 ",
+              shouldPrefixButtonWork
+                ? "pointer-events-auto"
+                : "pointer-events-none"
+            )}
+          >
+            {prefix}
+          </div>
+        )}
+
         <input
           id={label}
           {...rest}
@@ -103,12 +107,13 @@ const InputField = (props: InputFieldPropsType, ref: any) => {
               ? "  mb-0 placeholder-red-300 border-red-500   focus:ring-red-500  focus:border-red-500  "
               : "     border-gray-100   focus:ring-blue-500 focus:border-blue-500 text-gray-900",
             "placeholder:text-body2/regular placeholder:text-gray-400 text-body2/regular truncate block w-full rounded-md disabled:bg-gray-50/50 disabled:text-gray-400 disabled:border disabled:h-[38px] disabled:pl-3",
-            prefix ? "pl-6" : "",
+            prefix ? "pl-9" : "",
             "",
             inputClassName ? inputClassName : ""
           )}
           aria-invalid="true"
         />
+
         {sufix && (
           <div
             className={classNames(
@@ -122,6 +127,7 @@ const InputField = (props: InputFieldPropsType, ref: any) => {
           </div>
         )}
       </div>
+
       {error && (
         <p
           className={`p-0 pt-1 text-label/regular text-red-500 ${errorClassName}`}
