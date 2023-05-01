@@ -7,7 +7,7 @@ const Header = forwardRef((_props, ref) => {
   return (
     <header
       ref={ref as React.LegacyRef<HTMLElement>}
-      className="flex flex-row items-center justify-between  w-full h-16 px-6 py-3   border border-solid"
+      className="bg-white  flex flex-row items-center justify-between  w-full h-16 px-6 py-3   border border-solid"
     >
       <InputField
         contstyle="max-w-xs   border border-solid rounded"
