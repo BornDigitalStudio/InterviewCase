@@ -5,17 +5,20 @@ interface IconProps {
   color?: string;
   size: string | number;
   icon: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Icon(props: IconProps) {
-  const { color, size, icon } = props;
+  const { color, size, icon, onClick } = props;
   return (
-    <IcomoonReact
-      iconSet={selection}
-      className="cursor-pointer"
-      color={color}
-      size={size}
-      icon={icon}
-    />
+    <div onClick={onClick}>
+      <IcomoonReact
+        iconSet={selection}
+        className="cursor-pointer"
+        color={color}
+        size={size}
+        icon={icon}
+      />
+    </div>
   );
 }
