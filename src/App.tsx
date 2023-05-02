@@ -9,11 +9,13 @@ function App() {
       <Header />
 
       <TabContainer title="Settings">
-        <TabContainer.Target containerId="general">General</TabContainer.Target>
+        <TabContainer.Target containerId="general" defaultSelect>
+          General
+        </TabContainer.Target>
         <TabContainer.Target containerId="roles-management">
           Roles management
         </TabContainer.Target>
-        <TabContainer.Target defaultSelect containerId="user-management">
+        <TabContainer.Target containerId="user-management">
           User management
         </TabContainer.Target>
         <TabContainer.Target containerId="notifications">
