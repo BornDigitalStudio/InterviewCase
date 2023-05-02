@@ -23,7 +23,7 @@ function Tbody(props: TbodyProps) {
     return (
         <tbody
             className={classNames(
-                "block w-full sm:table-row-group",
+                "w-full table-row-group",
                 props.className
             )}
         >
@@ -42,7 +42,7 @@ function Td(props: TdProps) {
         <td
             className={classNames(
                 props.className,
-                "block sm:table-cell h-[60px] pt-[18px] pb-[18px] pl-[16px] pr-[16px] bg-white text-body3/regular text-gray-900 relative text-right sm:text-left before:content-['Receivable_amount'] sm:before:hidden before:absolute before:left-2 before:text-body3/medium before:text-gray-500"
+                "table-cell h-[60px] pt-[18px] pb-[18px] pl-[16px] pr-[16px] bg-white text-body3/regular text-gray-900 relative text-left"
             )}
         >
             {props.children}
@@ -76,7 +76,7 @@ interface TheadProps {
 
 function Thead(props: TheadProps) {
     return (
-        <thead className="w-full border-b-[1px] border-gray-100 hidden sm:table-header-group">
+        <thead className="w-full border-b-[1px] border-gray-100 sm:table-header-group">
             {props.children}
         </thead>
     );

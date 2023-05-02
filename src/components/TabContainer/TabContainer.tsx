@@ -98,7 +98,7 @@ TabContainer.Target = ({
 
 TabContainer.Container = ({ children, id }: ContainerProps) => {
   return (
-    <div id={id} className="p-6">
+    <div id={id} className="px-2 py-6 sm:p-6">
       {children}
     </div>
   );

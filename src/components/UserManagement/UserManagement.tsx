@@ -78,7 +78,7 @@ export default function UserManagement() {
       <Modal isOpen={isOpen} closeModal={closeModal} openModal={openModal}>
         <Modal.Background className=" backdrop-blur-0 bg-opacity-70" />
 
-        <Modal.ContentWrapper className="mt-20">
+        <Modal.ContentWrapper className="my-5 px-5 sm:mt-20">
           <Modal.Title>Add team member</Modal.Title>
 
           <AddUserForm onSubmit={handleSubmit} cancel={closeModal} />
@@ -87,11 +87,11 @@ export default function UserManagement() {
 
       <ToastPortal ref={ref} autoClose autoCloseTimeout={3000} />
 
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center justify-between">
         <div>
           <h2 className="text-h4">Update authorized people</h2>
 
-          <p className="text-gray-500 my-2">
+          <p className="text-gray-500 my-4 sm:my-2">
             Manage your team member and their account permissions here.
           </p>
         </div>
@@ -109,82 +109,84 @@ export default function UserManagement() {
 
       <Divider />
 
-      <Table className="border-collapse">
-        <Thead>
-          <Tr className="bg-gray-50">
-            <Th className="w-auto !bg-gray-50 border-0 border-transparent rounded-tl-lg">
-              {""}
-            </Th>
-            <Th className="w-auto !bg-gray-50">Name</Th>
-            <Th className="w-auto !bg-gray-50">Date added</Th>
-            <Th className="w-auto !bg-gray-50">Role</Th>
-            <Th className="w-auto !bg-gray-50">Last active</Th>
-            <Th className="w-auto !bg-gray-50">Status</Th>
-            <Th className="w-auto !bg-gray-50 !rounded-tr-lg">{""}</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {users.map(
-            ({
-              dateAdded,
-              id,
-              image,
-              lastActive,
-              name,
-              role,
-              status,
-              email,
-            }) => (
-              <Tr key={id}>
-                <Td className="border-b w-16 !text-body2/regular border-gray-100">
-                  <Avatar src={image} alt={`${name}'s profile picture`} />
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  <p>{name}</p>
-                  <p className="text-gray-500">{email}</p>
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  {dateAdded}
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  {role}
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  {lastActive}
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  <div className="flex flex-row gap-1.5">
-                    <Icon icon={STATUS_ICON[status]} size={12.5} /> {status}
-                  </div>
-                </Td>
-
-                <Td className="border-b !text-body2/regular border-gray-100">
-                  <div className="flex flex-row gap-5">
-                    <Icon
-                      icon="Pen"
-                      size={14}
-                      color="gray"
-                      onClick={handleEdit(id)}
-                    />
-
-                    <Icon
-                      icon="Delete"
-                      size={14}
-                      color="gray"
-                      onClick={handleDelete(id)}
-                    />
-                  </div>
-                </Td>
+        <div className="relative overflow-x-auto">
+          <Table className="border-collapse w-full border-transparent text-sm text-left text-gray-500">
+            <Thead>
+              <Tr className="bg-gray-50 table-row border-transparent sm:block">
+                <Th className="w-auto !bg-gray-50 border-0 border-transparent rounded-tl-lg">
+                  {""}
+                </Th>
+                <Th className="w-auto !bg-gray-50">Name</Th>
+                <Th className="w-auto !bg-gray-50">Date added</Th>
+                <Th className="w-auto !bg-gray-50">Role</Th>
+                <Th className="w-auto !bg-gray-50">Last active</Th>
+                <Th className="w-auto !bg-gray-50">Status</Th>
+                <Th className="w-auto !bg-gray-50 !rounded-tr-lg">{""}</Th>
               </Tr>
-            )
-          )}
-        </Tbody>
-      </Table>
+            </Thead>
+            <Tbody>
+              {users.map(
+                ({
+                  dateAdded,
+                  id,
+                  image,
+                  lastActive,
+                  name,
+                  role,
+                  status,
+                  email,
+                }) => (
+                  <Tr key={id} className="table-row sm:block border-none">
+                    <Td className="border-b w-16 !p-0 !text-body2/regular border-gray-100">
+                      <Avatar className="w-8 !h-8" src={image} alt={`${name}'s profile picture`} />
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      <p>{name}</p>
+                      <p className="text-gray-500">{email}</p>
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      {dateAdded}
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      {role}
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      {lastActive}
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      <div className="flex flex-row gap-1.5">
+                        <Icon icon={STATUS_ICON[status]} size={12.5} /> {status}
+                      </div>
+                    </Td>
+
+                    <Td className="border-b !text-body2/regular border-gray-100">
+                      <div className="flex flex-row gap-5">
+                        <Icon
+                          icon="Pen"
+                          size={14}
+                          color="gray"
+                          onClick={handleEdit(id)}
+                        />
+
+                        <Icon
+                          icon="Delete"
+                          size={14}
+                          color="gray"
+                          onClick={handleDelete(id)}
+                        />
+                      </div>
+                    </Td>
+                  </Tr>
+                )
+              )}
+            </Tbody>
+          </Table>
+        </div>
     </>
   );
 }
