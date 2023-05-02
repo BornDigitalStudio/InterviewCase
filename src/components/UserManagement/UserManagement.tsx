@@ -9,7 +9,7 @@ import { Th } from "@components/Table/Table";
 import { Td } from "@components/Table/Table";
 import { Modal, useModal } from "@components/Modal/Modal";
 import Avatar from "@components/Avatar";
-import { formatDateTo } from "@utils/functions/utils";
+import { formatDateTo, formatTime } from "@utils/functions/utils";
 import AddUserForm from "./AddUserForm";
 import { USER_DATA, STATUS_ICON } from "./constants";
 import type { DefaultValues } from "./types";
@@ -33,12 +33,15 @@ export default function UserManagement() {
     role,
     status,
   }: DefaultValues) => {
+    const currentTime = new Date().getTime();
     const newUser: (typeof users)[0] = {
-      dateAdded: formatDateTo(new Date().getTime()),
+      dateAdded: formatDateTo(currentTime),
       email,
-      id: users.length ? users.length - 1 : 0,
+      id: users.length + 1,
       image: avatar,
-      lastActive: formatDateTo(new Date().getTime() + DAY_IN_MILLISECONDS),
+      lastActive: `${formatDateTo(
+        currentTime + DAY_IN_MILLISECONDS
+      )} ${formatTime(currentTime + DAY_IN_MILLISECONDS)}`,
       name: `${firstName} ${lastName}`,
       role,
       status,
