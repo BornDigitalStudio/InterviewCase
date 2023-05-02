@@ -17,7 +17,13 @@ interface AddUserFormProps {
 }
 
 export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
-  const { register, handleSubmit, setValue, getValues } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
     mode: "onSubmit",
     defaultValues,
     resolver: yupResolver(schema),
@@ -70,6 +76,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
             </span>
           }
           description="Maximum file size 100MB"
+          error={errors.avatar}
           {...register("avatar", {
             required: true,
             onChange: handleOnChangeAvatar,
@@ -84,6 +91,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
           inputMode="text"
           inputClassName="h-10"
           placeholder="Enter team member first name"
+          error={errors.firstName}
           {...register("firstName", { required: true })}
         />
 
@@ -93,6 +101,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
           inputMode="text"
           inputClassName="h-10"
           placeholder="Enter team member first name"
+          error={errors.lastName}
           {...register("lastName", { required: true })}
         />
       </div>
@@ -103,6 +112,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
         inputMode="email"
         inputClassName="h-10"
         placeholder="Enter team member email address"
+        error={errors.email}
         {...register("email", { required: true })}
       />
 
@@ -112,6 +122,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
           value={getValues("role")}
           {...register("role", { required: true })}
           onChange={handleOnChangeSelect("role")}
+          error={errors.role}
           required
         >
           <ListBox.Label>Role</ListBox.Label>
@@ -142,6 +153,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
           placeholder="Select status"
           {...register("status", { required: true })}
           onChange={handleOnChangeSelect("status")}
+          error={errors.status}
           required
         >
           <ListBox.Label>Status</ListBox.Label>

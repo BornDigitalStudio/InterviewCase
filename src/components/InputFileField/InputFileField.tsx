@@ -76,6 +76,12 @@ const InputFileField = forwardRef(
             />
           </label>
         </div>
+
+        {error && (
+          <p className={`p-0 pt-1 text-label/regular text-red-500`}>
+            {error.message}
+          </p>
+        )}
       </div>
     );
   }
