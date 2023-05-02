@@ -68,6 +68,15 @@ export function formatDateTo(timestamp: number) {
     .replace(year.toString(), `, ${year}`);
 }
 
+export function formatTime(timestamp: number) {
+  const date = new Date(timestamp);
+  return date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+}
+
 export function formatDecimalToPercent(value: number) {
   const newVal = new Intl.NumberFormat("en-IN", { style: "percent" }).format(
     value
