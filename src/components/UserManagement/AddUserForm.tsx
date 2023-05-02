@@ -136,11 +136,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
 
           <ListBox.OptionsWrapper>
             {ROLES.map((role) => (
-              <ListBox.Option<typeof role>
-                className="p-2"
-                key={role}
-                value={role}
-              >
+              <ListBox.Option className="p-2" key={role} value={role}>
                 {role}
               </ListBox.Option>
             ))}
@@ -167,11 +163,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
 
           <ListBox.OptionsWrapper>
             {STATUSES.map((status) => (
-              <ListBox.Option<typeof status>
-                className="p-2"
-                key={status}
-                value={status}
-              >
+              <ListBox.Option className="p-2" key={status} value={status}>
                 {status}
               </ListBox.Option>
             ))}
