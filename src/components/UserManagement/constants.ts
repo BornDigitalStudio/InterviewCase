@@ -6,6 +6,7 @@ export const USER_DATA: User[] = [
     image:
       "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "John Smith",
+    email: "jenny.smith@gmail.com",
     dateAdded: "6th April, 2022",
     role: "Booking executive",
     lastActive: "10th April, 2022 4:35PM",
@@ -16,6 +17,7 @@ export const USER_DATA: User[] = [
     image:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Jenny Smith",
+    email: "jenny.smith@gmail.com",
     dateAdded: "6th April, 2022",
     role: "Pricing executive",
     lastActive: "6th April, 2022 4:00PM",
@@ -26,6 +28,7 @@ export const USER_DATA: User[] = [
     image:
       "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Jenny Doe",
+    email: "jenny.smith@gmail.com",
     dateAdded: "8th September, 2022",
     role: "Booking senior executive",
     lastActive: "8th September, 2022 11:15AM",
@@ -36,6 +39,7 @@ export const USER_DATA: User[] = [
     image:
       "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     name: "Alex Doe",
+    email: "jenny.smith@gmail.com",
     dateAdded: "10th June, 2022",
     role: "Pricing executive",
     lastActive: "10th June, 2022 10:30AM",

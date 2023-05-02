@@ -9,6 +9,7 @@ export default interface User {
   id: number;
   image: string;
   name: string;
+  email: string;
   dateAdded: string;
   role: Role;
   lastActive: string;
