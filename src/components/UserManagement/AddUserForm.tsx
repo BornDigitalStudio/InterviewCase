@@ -91,7 +91,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
         />
       )}
 
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <InputField
           label="First name"
           type="text"
@@ -123,7 +123,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
         {...register("email", { required: true })}
       />
 
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <ListBox
           className="w-full"
           value={role}
