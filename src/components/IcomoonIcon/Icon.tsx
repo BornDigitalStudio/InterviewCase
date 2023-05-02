@@ -14,7 +14,7 @@ export default function Icon(props: IconProps) {
     <div onClick={onClick}>
       <IcomoonReact
         iconSet={selection}
-        className="cursor-pointer"
+        className={`${onClick ? "cursor-pointer" : ""}`}
         color={color}
         size={size}
         icon={icon}
