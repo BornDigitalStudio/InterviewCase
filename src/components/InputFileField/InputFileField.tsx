@@ -61,7 +61,7 @@ export default function InputFileField({
         )}
       </div>
 
-      <input type="file" className="hidden" />
+      <input id={label} type="file" className="hidden" />
     </div>
   );
 }
