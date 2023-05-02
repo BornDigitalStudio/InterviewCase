@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 import type User from "./types";
-import type { DefaultValues, Role } from "./types";
+import type { DefaultValues, Role, Status } from "./types";
 
 export const ROLES: Role[] = [
   "Booking executive",
@@ -18,9 +18,21 @@ export const defaultValues: DefaultValues = {
   status: "Active",
 };
 
+// Made required so I can add the new user to the table
 export const schema = yup.object().shape({
+  avatar: yup.string().required(),
+  firstName: yup.string().min(1).required(),
+  lastName: yup.string().min(1).required(),
   email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  role: yup
+    .string()
+    .oneOf<Role>([
+      "Booking executive",
+      "Booking senior executive",
+      "Pricing executive",
+    ])
+    .required(),
+  status: yup.string().oneOf<Status>(["Active", "Inactive"]).required(),
 });
 
 export const STATUSES: ("Active" | "Inactive")[] = ["Active", "Inactive"];
