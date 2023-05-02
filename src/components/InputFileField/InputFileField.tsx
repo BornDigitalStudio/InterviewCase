@@ -1,6 +1,7 @@
-import { classNames } from "@root/utils/functions/utils";
 import { LegacyRef, forwardRef } from "react";
 import type { FieldError } from "react-hook-form";
+
+import { classNames } from "@utils/functions/utils";
 
 interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
