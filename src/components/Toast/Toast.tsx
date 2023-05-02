@@ -1,4 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Icon from "@components/IcomoonIcon/Icon";
 
 export const Toast = ({
     text,
@@ -36,28 +37,16 @@ export const Toast = ({
         >
             <div className={`flex  space-x-4 `}>
                 {type === "info" && (
-                    <img
-                        src="/assets/icons/toast/info.svg"
-                        className="w-5 h-5 text-blue-500"
-                    />
+                    <Icon size={16} icon="help-circle" color="blue" />
                 )}
                 {type === "confirm" && (
-                    <img
-                        src="/assets/icons/toast/confirm.svg"
-                        className="w-5 h-5 text-green-500"
-                    />
+                    <Icon size={16} icon="checkmark" />
                 )}
                 {type === "alert" && (
-                    <img
-                        src="/assets/icons/toast/error.svg"
-                        className="w-5 h-5 text-red-500"
-                    />
+                    <Icon size={16} icon="minus-outline" />
                 )}
                 {type === "warning" && (
-                    <img
-                        src="/assets/icons/enquiry/warning.svg"
-                        className="w-5 h-5 text-orange-500"
-                    />
+                    <Icon size={16} icon="warning" />
                 )}
                 <div className="flex flex-col gap-2">
                     <p className="font-medium text-gray-900 text-body2/regular">
