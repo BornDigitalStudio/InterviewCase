@@ -11,7 +11,7 @@ interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
   descriptionClassName?: string;
 }
 
-export default function InputFile({
+export default function InputFileField({
   label,
   labelClassName,
   error,
@@ -21,7 +21,10 @@ export default function InputFile({
   descriptionClassName,
 }: InputFileProps) {
   return (
-    <div className="flex flex-col items-start justify-center w-full">
+    <div
+      id={label?.split(" ").join("-").toLowerCase()}
+      className="flex flex-col items-start justify-center w-full"
+    >
       <label
         className={`relative first-letter:capitalize block text-body3/medium  text-gray-500  truncate whitespace-nowrap ${labelClassName} ${
           error ? "text-red-500" : ""
