@@ -149,11 +149,13 @@ ListBox.ButtonWrapper = function ButtonWrapper({
     error,
     children,
     placeholder,
+  className,
 }: {
     open?: boolean;
     error?: any;
     children: React.ReactNode;
     placeholder?: string;
+  className?: string;
 }) {
     return (
         <>
@@ -164,7 +166,8 @@ ListBox.ButtonWrapper = function ButtonWrapper({
                     open && "border-blue-500 ",
                     error?.message
                         ? "  mb-0 placeholder-red-300 border-red-500 ring-1 ring-red-500 focus:ring-red-500  focus:border-red-500  "
-                        : "border-gray-300"
+            : "border-gray-300",
+          className
                 )}
             >
                 {({ value }) => (
@@ -213,6 +216,7 @@ ListBox.Option = function Option<T>(props: {
     value: T;
     children: React.ReactNode;
     disabled?: boolean;
+  className?: string;
 }) {
     return (
         <Listbox.Option
@@ -224,7 +228,8 @@ ListBox.Option = function Option<T>(props: {
                 classNames(
                     active ? "bg-gray-50" : "",
                     selected ? "bg-gray-50 cursor-default" : "",
-                    "relative cursor-pointer select-none first-letter:capitalize "
+          "relative cursor-pointer select-none first-letter:capitalize ",
+          props.className ? props.className : ""
                 )
             }
             // disabled={person.unavailable}
