@@ -29,8 +29,8 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
       className="flex pb-4 flex-col gap-6"
     >
       <InputFileField
-        label="Avatar"
-        caption={
+        ontoInputLabel="Avatar"
+        label={
           <span>
             Drop here or{" "}
             <span className="text-body3/regular text-blue-500">Browse</span>{" "}
@@ -75,6 +75,7 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
           className="w-full"
           value={getValues("role")}
           {...register("role", { required: true })}
+          required
           onChange={handleSelect("role")}
         >
           <ListBox.Label>Role</ListBox.Label>
@@ -104,6 +105,7 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
           value={getValues("status")}
           placeholder="Select status"
           {...register("status", { required: true })}
+          required
           onChange={handleSelect("status")}
         >
           <ListBox.Label>Status</ListBox.Label>
