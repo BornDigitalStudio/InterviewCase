@@ -1,4 +1,13 @@
-import User from "./types";
+import type User from "./types";
+import type { Role } from "./types";
+
+export const ROLES: Role[] = [
+  "Booking executive",
+  "Booking senior executive",
+  "Pricing executive",
+];
+
+export const STATUSES: ("Active" | "Inactive")[] = ["Active", "Inactive"];
 
 export const USER_DATA: User[] = [
   {
