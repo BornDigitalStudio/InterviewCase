@@ -5,7 +5,7 @@ import { UserManagement } from "@components/UserManagement";
 
 function App() {
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100">
       <Header />
 
       <TabContainer title="Settings">
