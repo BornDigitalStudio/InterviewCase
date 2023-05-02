@@ -13,9 +13,10 @@ import Avatar from "../Avatar";
 
 interface AddUserFormProps {
   onSubmit: (data: DefaultValues) => void;
+  cancel: () => void;
 }
 
-export default function AddUserForm({ onSubmit }: AddUserFormProps) {
+export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
   const { register, handleSubmit, setValue, getValues } = useForm({
     mode: "onSubmit",
     defaultValues,
@@ -167,11 +168,17 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
       </div>
 
       <div className="flex flex-row items-center mt-8 justify-end gap-3">
-        <Button type="button" btnType="secondary" className="w-28" size="md">
+        <Button
+          type="button"
+          onClick={cancel}
+          btnType="secondary"
+          className="w-28"
+          size="md"
+        >
           Cancel
         </Button>
 
-        <Button type="button" btnType="primary" className="w-28" size="md">
+        <Button type="submit" btnType="primary" className="w-28" size="md">
           Save
         </Button>
       </div>
