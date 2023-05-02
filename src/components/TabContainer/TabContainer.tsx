@@ -27,7 +27,7 @@ export default function TabContainer({ title, children }: TabContainerProps) {
     <div className="p-10">
       <h1 className="text-header/h2">{title}</h1>
 
-      <div className="border-b my-9">
+      <div className="border-b my-9 flex flex-col sm:flex-row">
         {React.Children.map(children, (child) => {
           if (!React.isValidElement(child)) return child;
 
