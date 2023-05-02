@@ -5,6 +5,15 @@ export type Role =
 
 export type Status = "Active" | "Inactive";
 
+export interface DefaultValues {
+  avatar: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  role: Role
+  status: Status,
+}
+
 export default interface User {
   id: number;
   image: string;
