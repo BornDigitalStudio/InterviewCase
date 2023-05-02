@@ -5,8 +5,11 @@ import InputField from "@components/InputField/InputField";
 import InputFileField from "@components/InputFileField";
 import { ListBox } from "@components/Dropdown/Dropdown";
 import Button from "@components/Buttons/Button";
+import useDataUrl from "@hooks/useDataUrl";
 import { ROLES, STATUSES, defaultValues, schema } from "./constants";
 import type { DefaultValues } from "./types";
+import { useEffect } from "react";
+import Avatar from "../Avatar";
 
 interface AddUserFormProps {
   onSubmit: (data: DefaultValues) => void;
@@ -18,28 +21,60 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
     defaultValues,
     resolver: yupResolver(schema),
   });
+  const [avatar, setFile] = useDataUrl();
 
-  const handleSelect =
+  const handleOnChangeSelect =
     (field: keyof typeof defaultValues) => (value: unknown) =>
       setValue(field, value as string);
+
+  const handleOnChangeAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+
+    if (!files || !files.length) {
+      return;
+    }
+
+    const [avatarImageFile] = files;
+
+    setFile(avatarImageFile);
+  };
+
+  useEffect(() => {
+    if (avatar) {
+      setValue("avatar", avatar);
+    }
+  }, [avatar]);
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex pb-4 flex-col gap-6"
     >
-      <InputFileField
-        ontoInputLabel="Avatar"
-        label={
-          <span>
-            Drop here or{" "}
-            <span className="text-body3/regular text-blue-500">Browse</span>{" "}
-            files
-          </span>
-        }
-        description="Maximum file size 100MB"
-        {...register("avatar", { required: true })}
-      />
+      {avatar ? (
+        <div>
+          <p className="relative first-letter:capitalize block text-body3/medium my-2 text-gray-500  truncate whitespace-nowrap">
+            Avatar
+          </p>
+          <Avatar src={avatar} alt="Profile picture" className="!h-16 !w-16" />
+        </div>
+      ) : (
+        <InputFileField
+          ontoInputLabel="Avatar"
+          accept="image/png, image/jpeg, image/jpg"
+          label={
+            <span>
+              Drop here or{" "}
+              <span className="text-body3/regular text-blue-500">Browse</span>{" "}
+              files
+            </span>
+          }
+          description="Maximum file size 100MB"
+          {...register("avatar", {
+            required: true,
+            onChange: handleOnChangeAvatar,
+          })}
+        />
+      )}
 
       <div className="flex flex-row gap-4">
         <InputField
@@ -75,8 +110,8 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
           className="w-full"
           value={getValues("role")}
           {...register("role", { required: true })}
+          onChange={handleOnChangeSelect("role")}
           required
-          onChange={handleSelect("role")}
         >
           <ListBox.Label>Role</ListBox.Label>
 
@@ -105,8 +140,8 @@ export default function AddUserForm({ onSubmit }: AddUserFormProps) {
           value={getValues("status")}
           placeholder="Select status"
           {...register("status", { required: true })}
+          onChange={handleOnChangeSelect("status")}
           required
-          onChange={handleSelect("status")}
         >
           <ListBox.Label>Status</ListBox.Label>
 
