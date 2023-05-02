@@ -13,6 +13,7 @@ export interface ButtonProps {
   className?: string;
   type: "button" | "submit" | "reset";
   form?: string;
+  prefix?: React.ReactNode;
 }
 
 const Button = (props: ButtonProps, ref: any) => {
@@ -25,6 +26,7 @@ const Button = (props: ButtonProps, ref: any) => {
     underline,
     form,
     loading,
+    prefix,
     ...rest
   } = props;
   return (
@@ -36,7 +38,7 @@ const Button = (props: ButtonProps, ref: any) => {
         btnType === "primary"
           ? "bg-blue-500 text-white  hover:bg-blue-600"
           : btnType === "secondary"
-          ? "border border-gray-100 text-gray-900 hover:text-blue-500 "
+          ? "border border-gray-100 text-gray-900 hover:text-blue-500 hover:fill-blue-500 "
           : btnType === "text"
           ? "text-blue-500 hover:text-blue-600 "
           : ""
@@ -59,6 +61,8 @@ const Button = (props: ButtonProps, ref: any) => {
       {...rest}
     >
       {loading ? <Loader size={size === "sm" ? 12 : 16} /> : null}
+
+      {prefix}
       {/* <>
                 <span
                     className={`${
