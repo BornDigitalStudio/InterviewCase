@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Divider from "@components/Divider";
 import Icon from "@components/IcomoonIcon/Icon";
@@ -12,12 +12,15 @@ import Avatar from "@components/Avatar";
 import { formatDateTo, formatTime } from "@utils/functions/utils";
 import AddUserForm from "./AddUserForm";
 import { USER_DATA, STATUS_ICON } from "./constants";
+import { ToastPortal } from "@components/Toast/ToastPortal";
+import type { ToastType } from "@components/Toast/ToastPortal";
 import type { DefaultValues } from "./types";
 
 const DAY_IN_MILLISECONDS = 86400000;
 
 export default function UserManagement() {
   const [users, setUsers] = useState(USER_DATA);
+  const ref = useRef<ToastType>();
 
   const { closeModal, isOpen, openModal } = useModal();
 
@@ -48,7 +51,15 @@ export default function UserManagement() {
     };
 
     setUsers((prev) => [...prev, newUser]);
+
     closeModal();
+
+    ref.current?.addToast({
+      message: "You have successfully added new team member",
+      type: "alert",
+      cloasable: true,
+      position: "top-left",
+    });
 
     console.log({
       payload: {
@@ -73,6 +84,8 @@ export default function UserManagement() {
           <AddUserForm onSubmit={handleSubmit} cancel={closeModal} />
         </Modal.ContentWrapper>
       </Modal>
+
+      <ToastPortal ref={ref} autoClose autoCloseTimeout={3000} />
 
       <div className="flex flex-row items-center justify-between">
         <div>
