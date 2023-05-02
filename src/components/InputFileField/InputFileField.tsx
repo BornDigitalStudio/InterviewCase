@@ -46,35 +46,35 @@ const InputFileField = forwardRef(
           )}
         </p>
 
-        <div className="flex mt-1 flex-col items-center cursor-pointer justify-center w-full h-24 border border-gray-300 border-dashed rounded-lg hover:bg-gray-50 pt-5 pb-6">
+        <div className="cursor-pointer w-full h-24 border border-gray-300 border-dashed rounded-lg hover:bg-gray-50">
           <label
             htmlFor={ontoInputLabel}
             className={classNames(
-              "mb-2 text-body3/regular cursor-pointer text-gray-900",
+              "mb-2 h-full w-full flex mt-1 flex-col justify-center items-center text-body3/regular cursor-pointer text-gray-900",
               labelClassName ? labelClassName : ""
             )}
           >
             {label}
+
+            {description && (
+              <p
+                className={classNames(
+                  "text-label/regular text-gray-500",
+                  descriptionClassName ? descriptionClassName : ""
+                )}
+              >
+                {description}
+              </p>
+            )}
+
+            <input
+              id={ontoInputLabel}
+              {...rest}
+              ref={ref}
+              type="file"
+              className="hidden"
+            />
           </label>
-
-          {description && (
-            <p
-              className={classNames(
-                "text-label/regular text-gray-500",
-                descriptionClassName ? descriptionClassName : ""
-              )}
-            >
-              {description}
-            </p>
-          )}
-
-          <input
-            id={ontoInputLabel}
-            {...rest}
-            ref={ref}
-            type="file"
-            className="hidden"
-          />
         </div>
       </div>
     );
