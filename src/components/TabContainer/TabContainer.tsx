@@ -1,4 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { classNames } from "@utils/functions/utils";
 
@@ -10,7 +11,6 @@ interface TabContainerProps {
 interface TargetProps {
   active?: boolean;
   defaultSelect?: boolean;
-  handleSetTab?: (containerId: string) => void;
   containerId: string;
   children: React.ReactNode;
 }
@@ -21,7 +21,7 @@ interface ContainerProps {
 }
 
 export default function TabContainer({ title, children }: TabContainerProps) {
-  const [activeTab, setActiveTab] = useState();
+  const { hash } = useLocation();
 
   return (
     <div className="p-10">
@@ -35,9 +35,8 @@ export default function TabContainer({ title, children }: TabContainerProps) {
             return React.cloneElement(child, {
               ...child.props,
               children: child.props.children,
-              active: child.props.containerId === activeTab,
+              active: `#${child.props.containerId}` === hash,
               containerId: child.props.containerId,
-              handleSetTab: setActiveTab,
             });
           }
         })}
@@ -49,7 +48,7 @@ export default function TabContainer({ title, children }: TabContainerProps) {
 
           if (
             child.type === TabContainer.Container &&
-            child.props.id === activeTab
+            `#${child.props.id}` === hash
           ) {
             return (
               <div>
@@ -71,14 +70,14 @@ TabContainer.Target = ({
   children,
   defaultSelect,
   active,
-  handleSetTab,
   containerId,
 }: TargetProps) => {
-  const handleNavigate = () => handleSetTab && handleSetTab(containerId!);
+  const navigate = useNavigate();
+  const { hash } = useLocation();
 
   useLayoutEffect(() => {
-    if (defaultSelect && handleSetTab) {
-      handleSetTab(containerId);
+    if (defaultSelect && hash === "") {
+      navigate(`#${containerId}`);
     }
   }, [defaultSelect]);
 
@@ -91,9 +90,8 @@ TabContainer.Target = ({
           : ""
       )}
       type="button"
-      onClick={handleNavigate}
     >
-      {children}
+      <a href={`#${containerId}`}>{children}</a>
     </button>
   );
 };
