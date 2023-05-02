@@ -20,7 +20,7 @@ export default function GeneralForm() {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center justify-between">
         <div>
           <h2 className="text-h4">General</h2>
 
@@ -30,7 +30,7 @@ export default function GeneralForm() {
         </div>
 
         <div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 mt-4 sm:my-0">
             <Button btnType="secondary" type="button" size="md">
               Cancel
             </Button>
@@ -44,7 +44,7 @@ export default function GeneralForm() {
 
       <Divider />
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex justify-end flex-col gap-5">
           <p>Email</p>
           <InputField
