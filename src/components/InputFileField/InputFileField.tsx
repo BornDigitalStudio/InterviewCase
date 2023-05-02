@@ -19,6 +19,7 @@ export default function InputFileField({
   cationClassName,
   description,
   descriptionClassName,
+  required,
 }: InputFileProps) {
   return (
     <div
@@ -31,6 +32,11 @@ export default function InputFileField({
         }`}
       >
         {label}
+        {required && (
+          <span className="absolute font-light text-red-500 -top-1.5">
+            &lowast;
+          </span>
+        )}
       </label>
 
       <div className="flex mt-1 flex-col items-center cursor-pointer justify-center w-full h-24 border border-gray-300 border-dashed rounded-lg hover:bg-gray-50 pt-5 pb-6">
