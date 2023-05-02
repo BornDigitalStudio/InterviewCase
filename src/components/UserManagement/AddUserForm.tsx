@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -6,10 +7,9 @@ import InputFileField from "@components/InputFileField";
 import { ListBox } from "@components/Dropdown/Dropdown";
 import Button from "@components/Buttons/Button";
 import useDataUrl from "@hooks/useDataUrl";
+import Avatar from "@components/Avatar";
 import { ROLES, STATUSES, defaultValues, schema } from "./constants";
 import type { DefaultValues } from "./types";
-import { useEffect } from "react";
-import Avatar from "../Avatar";
 
 interface AddUserFormProps {
   onSubmit: (data: DefaultValues) => void;
@@ -21,7 +21,6 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
@@ -29,10 +28,8 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
     resolver: yupResolver(schema),
   });
   const [avatar, setFile] = useDataUrl();
-
-  const handleOnChangeSelect =
-    (field: keyof typeof defaultValues) => (value: unknown) =>
-      setValue(field, value as string);
+  const [role, setRole] = useState<DefaultValues["role"]>("Booking executive");
+  const [status, setStatus] = useState<DefaultValues["status"]>("Active");
 
   const handleOnChangeAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -45,6 +42,16 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
 
     setFile(avatarImageFile);
   };
+
+  const handleStatus = useCallback((value: unknown) => {
+    setValue("status", value as DefaultValues["status"]);
+    setStatus(value as DefaultValues["status"]);
+  }, []);
+
+  const handleRole = useCallback((value: unknown) => {
+    setValue("role", value as DefaultValues["role"]);
+    setRole(value as DefaultValues["role"]);
+  }, []);
 
   useEffect(() => {
     if (avatar) {
@@ -119,9 +126,9 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
       <div className="flex flex-row gap-4">
         <ListBox
           className="w-full"
-          value={getValues("role")}
+          value={role}
           {...register("role", { required: true })}
-          onChange={handleOnChangeSelect("role")}
+          onChange={handleRole}
           error={errors.role}
           required
         >
@@ -131,7 +138,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
             className="!border-gray-100 shadow-sm"
             placeholder="Enter team member role"
           >
-            {getValues("role")}
+            {role}
           </ListBox.ButtonWrapper>
 
           <ListBox.OptionsWrapper>
@@ -145,10 +152,10 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
 
         <ListBox
           className="w-full"
-          value={getValues("status")}
+          value={status}
           placeholder="Select status"
           {...register("status", { required: true })}
-          onChange={handleOnChangeSelect("status")}
+          onChange={handleStatus}
           error={errors.status}
           required
         >
@@ -158,7 +165,7 @@ export default function AddUserForm({ onSubmit, cancel }: AddUserFormProps) {
             className="!border-gray-100 shadow-sm"
             placeholder="Select status"
           >
-            {getValues("status")}
+            {status}
           </ListBox.ButtonWrapper>
 
           <ListBox.OptionsWrapper>
