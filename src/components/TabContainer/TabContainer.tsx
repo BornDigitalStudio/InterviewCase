@@ -24,7 +24,7 @@ export default function TabContainer({ title, children }: TabContainerProps) {
   const { hash } = useLocation();
 
   return (
-    <div className="p-10">
+    <div className="p-2 sm:p-10">
       <h1 className="text-header/h2">{title}</h1>
 
       <div className="border-b my-9 flex flex-col sm:flex-row">
