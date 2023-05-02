@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@components/InputField/InputField";
 import InputFileField from "@components/InputFileField";
 import { ListBox } from "@components/Dropdown/Dropdown";
 import Button from "@components/Buttons/Button";
-import { ROLES, STATUSES } from "./constants";
+import { ROLES, STATUSES, defaultValues, schema } from "./constants";
+import type { DefaultValues } from "./types";
 
-export default function AddUserForm() {
-  const [value, setValue] =
-    useState<(typeof ROLES)[number]>("Booking executive");
-  const [status, setStatus] = useState<(typeof STATUSES)[0]>("Active");
+interface AddUserFormProps {
+  onSubmit: (data: DefaultValues) => void;
+}
+
+export default function AddUserForm({ onSubmit }: AddUserFormProps) {
+  const { register, handleSubmit, setValue, getValues } = useForm({
+    mode: "onSubmit",
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
+
+  const handleSelect =
+    (field: keyof typeof defaultValues) => (value: unknown) =>
+      setValue(field, value as string);
 
   return (
-    <div className="flex pb-4 flex-col gap-6">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex pb-4 flex-col gap-6"
+    >
       <InputFileField
         label="Avatar"
         caption={
@@ -23,6 +38,7 @@ export default function AddUserForm() {
           </span>
         }
         description="Maximum file size 100MB"
+        {...register("avatar", { required: true })}
       />
 
       <div className="flex flex-row gap-4">
@@ -32,6 +48,7 @@ export default function AddUserForm() {
           inputMode="text"
           inputClassName="h-10"
           placeholder="Enter team member first name"
+          {...register("firstName", { required: true })}
         />
 
         <InputField
@@ -40,6 +57,7 @@ export default function AddUserForm() {
           inputMode="text"
           inputClassName="h-10"
           placeholder="Enter team member first name"
+          {...register("lastName", { required: true })}
         />
       </div>
 
@@ -49,35 +67,61 @@ export default function AddUserForm() {
         inputMode="email"
         inputClassName="h-10"
         placeholder="Enter team member email address"
+        {...register("email", { required: true })}
       />
 
       <div className="flex flex-row gap-4">
-        <ListBox className="w-full" value={value} onChange={setValue}>
+        <ListBox
+          className="w-full"
+          value={getValues("role")}
+          {...register("role", { required: true })}
+          onChange={handleSelect("role")}
+        >
           <ListBox.Label>Role</ListBox.Label>
 
-          <ListBox.ButtonWrapper className="!border-gray-100 shadow-sm" placeholder="Enter team member role">
-            {value}
+          <ListBox.ButtonWrapper
+            className="!border-gray-100 shadow-sm"
+            placeholder="Enter team member role"
+          >
+            {getValues("role")}
           </ListBox.ButtonWrapper>
 
           <ListBox.OptionsWrapper>
             {ROLES.map((role) => (
-              <ListBox.Option className="p-2" key={role} value={role}>
+              <ListBox.Option<typeof role>
+                className="p-2"
+                key={role}
+                value={role}
+              >
                 {role}
               </ListBox.Option>
             ))}
           </ListBox.OptionsWrapper>
         </ListBox>
 
-        <ListBox className="w-full" value={status} onChange={setStatus}>
+        <ListBox
+          className="w-full"
+          value={getValues("status")}
+          placeholder="Select status"
+          {...register("status", { required: true })}
+          onChange={handleSelect("status")}
+        >
           <ListBox.Label>Status</ListBox.Label>
 
-          <ListBox.ButtonWrapper className="!border-gray-100 shadow-sm" placeholder="Select status">
-            {status}
+          <ListBox.ButtonWrapper
+            className="!border-gray-100 shadow-sm"
+            placeholder="Select status"
+          >
+            {getValues("status")}
           </ListBox.ButtonWrapper>
 
           <ListBox.OptionsWrapper>
             {STATUSES.map((status) => (
-              <ListBox.Option className="p-2" key={status} value={status}>
+              <ListBox.Option<typeof status>
+                className="p-2"
+                key={status}
+                value={status}
+              >
                 {status}
               </ListBox.Option>
             ))}
@@ -94,6 +138,6 @@ export default function AddUserForm() {
           Save
         </Button>
       </div>
-    </div>
+    </form>
   );
 }
