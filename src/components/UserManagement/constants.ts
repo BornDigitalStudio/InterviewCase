@@ -1,11 +1,27 @@
+import * as yup from "yup";
+
 import type User from "./types";
-import type { Role } from "./types";
+import type { DefaultValues, Role } from "./types";
 
 export const ROLES: Role[] = [
   "Booking executive",
   "Booking senior executive",
   "Pricing executive",
 ];
+
+export const defaultValues: DefaultValues = {
+  avatar: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "Booking executive",
+  status: "Active",
+};
+
+export const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+});
 
 export const STATUSES: ("Active" | "Inactive")[] = ["Active", "Inactive"];
 
